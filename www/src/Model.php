@@ -28,6 +28,24 @@ abstract class Model
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    public function findWithConditions(array $conditions): ?array
+    {
+        $sql = "SELECT * FROM " . static::$table . " WHERE ";
+        $params = [];
+        $clauses = [];
+
+        foreach ($conditions as $column => $value) {
+            $clauses[] = "`$column` = ?";
+            $params[] = $value;
+        }
+
+        $sql .= implode(' AND ', $clauses);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
     public function insert(array $data): int
     {
         $columns = implode(", ", array_keys($data));

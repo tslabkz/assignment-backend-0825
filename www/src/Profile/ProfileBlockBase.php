@@ -1,12 +1,12 @@
 <?php 
 
-namespace Profile;
+namespace App\Profile;
 
 // Базовый класс для блоков профиля
 abstract class ProfileBlockBase
 {
-    // Здесь можно добавить общие методы и свойства для всех блоков профиля
     protected $loadedData;
+
     protected $errors = [];
 
 
@@ -19,6 +19,8 @@ abstract class ProfileBlockBase
     abstract static public function description();
     
     abstract static public function read($profile);
+
+    abstract public function render();
 
     public function load($data)
     {

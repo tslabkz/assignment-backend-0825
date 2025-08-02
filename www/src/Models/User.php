@@ -6,5 +6,5 @@ use App\Model;
 
 class User extends Model
 {
-    protected static string $table = 'users';
+    protected static string $table = 'user';
 }

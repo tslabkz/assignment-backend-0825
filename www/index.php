@@ -13,5 +13,8 @@ if (__FILE__ === realpath($_SERVER['SCRIPT_FILENAME'])) {
     echo "<h1>Welcome to the Assignment Backend 0825</h1>";
     echo "<p>Current request URI: <strong>{$requestUri}</strong></p>";
     echo "<p>To access the application, please navigate to <a href='/pages/users/insert.php'>Insert User Page</a>.</p>";
+    echo "<p>To view the profile creation page, please navigate to <a href='/pages/profiles/create.php'>Create Profile Page</a>.</p>";  
     exit;
-} 
+} else {
+    echo "<p>Go <a href='/'>home</a>.</p>";
+}

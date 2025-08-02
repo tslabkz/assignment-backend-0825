@@ -38,13 +38,9 @@ class Connection
                 ]
             );
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-
-        $charset = $this->pdo->query("SELECT @@character_set_client, @@collation_connection")->fetchAll(PDO::FETCH_ASSOC);
-var_dump($charset);
-
-        return $this->pdo;
-    }
+        } 
+        return $this->pdo; 
+    } 
 }
 
 

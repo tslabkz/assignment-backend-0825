@@ -28,7 +28,7 @@ final class Version20250802110535 extends AbstractMigration
             ";
         $this->addSql($tableSql);
         $this->addSql("INSERT INTO `chosen_predmet` (name) VALUES ('Физика'), ('Химия'), ('Биология'), ('История'), ('География'), ('Литература'), ('Математика'), ('Информатика');");
-        $this->addSql("CREATE TABLE `chosen_user` ( 
+        $this->addSql("CREATE TABLE `chosen_predmet_user` ( 
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id INT NOT NULL,
                 chosen_predmet_id INT NOT NULL,
