@@ -10,26 +10,29 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250801103203 extends AbstractMigration
+final class Version20250802095934 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'user table migration';
+        return 'profile blocks migration';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $tableSql = "CREATE TABLE `user` ( 
+        $tableSql = "CREATE TABLE `profile` ( 
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(100) NOT NULL,
-                email VARCHAR(150) NOT NULL UNIQUE,
-                birthdate DATE DEFAULT NULL,
-                class int DEFAULT 0,
+                user_id int NOT NULL,
+                fio_block int DEFAULT 0,
+                birthdate_block int DEFAULT 0,
+                facult_block int DEFAULT 0,
+                olimpic_block int DEFAULT 0,
+                chosen_predmet_block int DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
             ) ENGINE=InnoDB  CHARACTER  SET utf8mb4 COLLATE utf8mb4_unicode_ci; 
             ";
         $this->addSql($tableSql);
+
     }
 
     public function down(Schema $schema): void

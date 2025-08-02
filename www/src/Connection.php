@@ -27,15 +27,22 @@ class Connection
         if (is_null($this->pdo)) {
             $this->pdo = new PDO(
                 sprintf(
-                    'mysql:host=%s;dbname=%s;charset=utf8',
+                    'mysql:host=%s;dbname=%s;charset=utf8mb4',
                     $_ENV['DB_HOST'] ?? 'assignment_backend_0825_db',
                     $_ENV['DB_NAME'] ?? 'assignment_backend_0825'
                 ),
                 $_ENV['DB_USER'] ?? 'root',
-                $_ENV['DB_PASS'] ?? 'password'
+                $_ENV['DB_PASS'] ?? 'password',
+                [
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci",
+                ]
             );
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
+
+        $charset = $this->pdo->query("SELECT @@character_set_client, @@collation_connection")->fetchAll(PDO::FETCH_ASSOC);
+var_dump($charset);
+
         return $this->pdo;
     }
 }
