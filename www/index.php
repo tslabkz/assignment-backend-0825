@@ -1,28 +1,17 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php'; 
 
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Dotenv\Dotenv; 
 
-$dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__ . '/.env');
+$dotenv = new Dotenv(); 
+$dotenv->loadEnv(__DIR__ . '/.env'); 
 
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); 
 
-// print_r($requestUri); die(); 
-
-// switch ($requestUri) { 
-//     case '/': 
-//         require __DIR__ . '/pages/home.php'; 
-//         break; 
-//     case '/about': 
-//         require __DIR__ . '/pages/about.php'; 
-//         break; 
-//     case '/about': 
-//         require __DIR__ . '/pages/about.php'; 
-//         break; 
-//     default: 
-//         http_response_code(404); 
-//         echo "<h1>404 - Not Found</h1>"; 
-//         break; 
-// } 
+if (__FILE__ === realpath($_SERVER['SCRIPT_FILENAME'])) {
+    echo "<h1>Welcome to the Assignment Backend 0825</h1>";
+    echo "<p>Current request URI: <strong>{$requestUri}</strong></p>";
+    echo "<p>To access the application, please navigate to <a href='/pages/users/insert.php'>Insert User Page</a>.</p>";
+    exit;
+} 
