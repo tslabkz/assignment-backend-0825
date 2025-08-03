@@ -18,9 +18,24 @@ abstract class ProfileBlockBase
 
     abstract static public function description();
     
-    abstract static public function read($profile);
+    abstract public function read($profile);
 
-    abstract public function render();
+    
+    public function render()
+    {
+        $props = $this->properties();
+        $html = '';
+        foreach ($props as $prop) {
+
+            $html .= "<div class=\"mb-3 row\">";
+                $html .= "<label  class=\"col-sm-3 col-form-label\">{$prop['label']}</label>";
+                $html .= "<div class=\"col-sm-9\">";
+                    $html .= (new $prop['html']($prop['name'], $this->data[$prop['name']] ?? '', $prop['form_asset']()))->render();       
+                $html .= "</div>";
+            $html .= "</div>";
+        }
+        return '<div class="'.static::code().'-block">' . $html . '</div>';
+    }
 
     public function load($data)
     {
@@ -42,7 +57,7 @@ abstract class ProfileBlockBase
     /**
      * Метод для получения ошибок после обработки блока профиля
      */
-    protected function errors()
+    public function errors()
     {
         return $this->errors; 
     }

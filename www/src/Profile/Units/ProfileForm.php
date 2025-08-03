@@ -6,13 +6,16 @@ use App\Profile\ProfileStruct;
 
 class ProfileForm
 {
-    // This class can be used to handle profile form logic
-    // For example, it can include methods for validation, submission, etc.
     protected $profileStruct;
 
-    function __construct($user = null)
+    function __construct($profile = null)
     {
-        $this->profileStruct = new ProfileStruct($user);
+        $this->profileStruct = new ProfileStruct($profile);
+    }
+
+    public function getProfile()
+    {
+        return $this->profileStruct->getProfile();
     }
 
     /**
@@ -31,11 +34,11 @@ class ProfileForm
      */
     public static function of($id) 
     {
-        $user = ProfileStruct::findUser($id);
-        if (is_null($user)) {
-            throw new \Exception("User not found");
+        $profile = ProfileStruct::findProfile($id);
+        if (is_null($profile)) {
+            throw new \Exception("Profile not found");
         }
-        return new self($user);
+        return new self($profile);
     } 
 
     public function getBlocks()

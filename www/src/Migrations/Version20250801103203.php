@@ -23,7 +23,9 @@ final class Version20250801103203 extends AbstractMigration
         $tableSql = "CREATE TABLE `user` ( 
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(100) NOT NULL,
-                email VARCHAR(150) NOT NULL UNIQUE,
+                surname VARCHAR(100) NOT NULL,
+                lastname VARCHAR(100) NOT NULL,
+                email VARCHAR(150) NULL ,
                 birthdate DATE DEFAULT NULL,
                 class int DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
