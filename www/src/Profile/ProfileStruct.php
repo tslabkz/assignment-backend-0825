@@ -5,7 +5,8 @@ namespace App\Profile;
 use App\Profile\Blocks\BirthdateBlock;
 use App\Profile\Blocks\ClassBlock;
 use App\Profile\Blocks\EmailBlock;
-use App\Profile\Blocks\FioBlock; 
+use App\Profile\Blocks\FioBlock;
+use App\Profile\Blocks\FacultativeBlock;
 
 /** 
  * стркуктура профиля пользователя (школьника) 
@@ -21,6 +22,7 @@ class ProfileStruct
         BirthdateBlock::class,
         EmailBlock::class,
         ClassBlock::class,
+        FacultativeBlock::class,
         // \App\Profile\Blocks\BirthdateBlock::class, 
         // \Profile\Blocks\FacultativeBlock::class, 
         // \Profile\Blocks\SportBlock::class, // задание 

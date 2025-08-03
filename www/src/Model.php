@@ -28,7 +28,7 @@ abstract class Model
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
-    public function findWithConditions(array $conditions): ?array
+    public function findWhere(array $conditions): ?array
     {
         $sql = "SELECT * FROM " . static::$table . " WHERE ";
         $params = [];
@@ -43,7 +43,7 @@ abstract class Model
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
     }
 
     public function insert(array $data): int
@@ -66,5 +66,23 @@ abstract class Model
     {
         $stmt = $this->pdo->prepare("DELETE FROM " . static::$table . " WHERE " . static::$primaryKey . " = ?");
         return $stmt->execute([$id]);
+    }
+    
+    public function deleteWhere(array $conditions): bool
+    {
+        $whereParts = [];
+        $values = [];
+
+        foreach ($conditions as $column => $value) {
+            $whereParts[] = "`$column` = ?";
+            $values[] = $value;
+        }
+
+        $whereClause = implode(' AND ', $whereParts);
+
+        $sql = "DELETE FROM " . static::$table . " WHERE " . $whereClause;
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute($values);
     }
 }

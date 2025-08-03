@@ -56,7 +56,7 @@ class FioBlock extends ProfileBlockBase
         $html .= 'Отчество: ' . ($this->data['lastname'] ?? 'Не указано') . '<br>';
         // Здесь можно добавить другие поля
         
-        return '<div class="fio-block">' . $html . '</div>';
+        return '<div class="' . static::code() . '-block">' . $html . '</div>';
     }
 
     /**
