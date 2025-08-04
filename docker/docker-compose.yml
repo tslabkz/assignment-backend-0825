@@ -40,7 +40,12 @@ services:
             MYSQL_PASSWORD: password
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
             MYSQL_CHARSET: utf8mb4
-            MYSQL_COLLATION: utf8mb4_unicode_ci   
+            MYSQL_COLLATION: utf8mb4_unicode_ci
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p$$MYSQL_ROOT_PASSWORD"]
+            interval: 5s
+            timeout: 5s
+            retries: 10
         volumes:
             - persistent_0825:/var/lib/mysql
         networks:
