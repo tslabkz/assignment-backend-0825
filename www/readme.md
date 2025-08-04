@@ -1,6 +1,6 @@
 
+docker compose exec -u www-data backend composer install
 
-bin/console migrations:generate
+docker compose exec -u www-data backend php bin/console migrations:migrate
 
-bin/console migrations:migrate
-
+docker compose exec -u www-data backend php bin/console migrations:generate

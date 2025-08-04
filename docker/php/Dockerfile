@@ -8,13 +8,6 @@ FROM php:8.3.14-apache
 ARG UID
 ARG GID
 
-
-# Enable Apache SSL and other necessary modules
-# RUN a2enmod ssl && \
-#     a2enmod rewrite && \
-#     a2enmod headers
-
-
 RUN set -eux; \
     \
     savedAptMark="$(apt-mark showmanual)"; \
