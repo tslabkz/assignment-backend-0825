@@ -26,6 +26,7 @@ final class Version20250802095934 extends AbstractMigration
                 fio_block int DEFAULT 0,
                 birthdate_block int DEFAULT 0,
                 facult_block int DEFAULT 0,
+                sport_block int DEFAULT 0,
                 olimpic_block int DEFAULT 0,
                 chosen_predmet_block int DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 

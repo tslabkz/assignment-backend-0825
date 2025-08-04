@@ -21,21 +21,12 @@ $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 </head>
 <body>
     <div class="container">
-
-
-        <!-- <h1>Welcome to the Assignment Backend 0825</h1>
-        <p>Current request URI: <strong><?php echo htmlspecialchars($requestUri); ?></strong></p>
-        <p>To access the application, please navigate to <a href="/pages/users/insert.php">Insert User Page</a>.</p>
-        <p>To view              the profile creation page, please navigate to <a href="/pages/profiles/create.php">Create Profile Page</a>.</p>  -->
-   
-
-
-<?php
+<?php 
 if (__FILE__ === realpath($_SERVER['SCRIPT_FILENAME'])) {
     echo "<h1>Welcome to the Assignment Backend 0825</h1>";
     echo "<p>Current request URI: <strong>{$requestUri}</strong></p>";
-    echo "<p>To access the application, please navigate to <a href='/pages/users/insert.php'>Insert User Page</a>.</p>";
     echo "<p>To view the profile creation page, please navigate to <a href='/pages/profiles/create.php'>Create Profile Page</a>.</p>";  
+    echo "<p>To list the profile creation page, please navigate to <a href='/pages/profiles/list.php'>List Profile Page</a>.</p>";  
     include __DIR__ . '/pages/page_end.php';
     exit;
 } else {

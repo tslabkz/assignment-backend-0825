@@ -1,8 +1,8 @@
-<?php 
+<?php
+
+use App\Profile\Units\ProfileSubmit;
 
 require_once (dirname(__DIR__, 2) . '/index.php'); 
-
-use App\Models\User; 
 
 echo '<h1>Update Profile</h1> <p>Updating existing profile</p>'; 
 
@@ -13,7 +13,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $id = (int)$_GET['id'];
 
 if (!empty($_POST)) {  
-    $profileSubmit = \App\Profile\Units\ProfileSubmit::new();
+    $profileSubmit = ProfileSubmit::of($id);
     $profileSubmit->loadData($_POST);
     $profileSubmit->handle();
     $errors = $profileSubmit->errors(); 
@@ -40,6 +40,7 @@ foreach ($blocks as $block) {
     $block->read($profileForm->getProfile());
     if (method_exists($block, 'render')) {
         echo $block->render();
+        echo '<hr>';
     } else {
         echo 'No render method available for this block.';
     }

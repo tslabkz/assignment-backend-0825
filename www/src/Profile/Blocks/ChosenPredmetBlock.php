@@ -5,7 +5,9 @@ namespace Profile\Blocks;
 use Profile\ProfileBlockBase;
 
 // Блок, который собирает информацию о выбранном предмете
-class ChosenPredmetBlock extends ProfileBlockBase
+// Этот блок может быть использован для отображения или редактирования информации о предмете, который был выбран пользователем
+// четвертный предмет
+class ChosenPredmetBlock 
 {
     
 }

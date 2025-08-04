@@ -53,7 +53,8 @@ class BirthdateBlock extends ProfileBlockBase
      * Метод для обработки данных блока профиля
      */
     public function handle() {
-        if (isset($this->loadedData['birthdate'])) {
+        $birthdate = null;
+        if (isset($this->loadedData['birthdate']) && !empty($this->loadedData['birthdate'])) {
             $birthdate = trim($this->loadedData['birthdate']);
         } 
         if (empty($this->errors)) {
@@ -63,16 +64,21 @@ class BirthdateBlock extends ProfileBlockBase
                 [
                     'birthdate' => $birthdate,
                 ]
-            ); // Assuming update method exists
+            ); 
         }
+        // Обновляем профиль, чтобы отметить, что блок день рождения был изменен
+        (new \App\Models\Profile())->update(
+            $this->profile['id'], 
+            [
+                'birthdate_block' => empty($birthdate) ? 0 : 1,
+            ]
+        );
     }
 
     public function properties(): array
     {
         // Возвращает свойства блока ФИО
         return [
-
-
             [
                 'name' => 'birthdate',
                 'label' => 'Дата рождения',

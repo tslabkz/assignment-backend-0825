@@ -2,13 +2,9 @@
 
 namespace App\Profile\Blocks;
 
-use App\Html\HtmlInput;
 use App\Html\HtmlEmail;
-use App\Html\HtmlSelect;
 use App\Models\User;
 use App\Profile\ProfileBlockBase;
-
-// Базовый класс для блоков профиля
 
 class EmailBlock extends ProfileBlockBase
 {
@@ -34,8 +30,6 @@ class EmailBlock extends ProfileBlockBase
     
     public function read($profile)
     {
-        // Логика для чтения данных ФИО из профиля
-        // return $profile->fio ?? '';
         $this->profile = $profile;
         $this->user = (new \App\Models\User())->find($profile['user_id']); // Assuming profile has a user_id property
         $this->data = [

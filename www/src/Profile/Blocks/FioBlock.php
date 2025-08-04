@@ -99,8 +99,15 @@ class FioBlock extends ProfileBlockBase
                     // 'email' => $email
                 ]
             ); // Assuming update method exists
-
         }
+
+        // Обновляем профиль, чтобы отметить, что блок фио был изменен
+        (new \App\Models\Profile())->update(
+            $this->profile['id'], 
+            [
+                'fio_block' => empty($surname) && empty($name) ? 0 : 1,
+            ]
+        );
     }
 
     public function properties(): array

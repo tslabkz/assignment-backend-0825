@@ -7,14 +7,12 @@ use App\Models\FacultativePredmet;
 use App\Profile\ProfileBlockBase;
 
 // блок, который собирает информацию о факультативных занятиях
-
 class FacultativeBlock extends ProfileBlockBase
 {
     protected $data;
     protected $user;
     protected $profile;
     
-    // Здесь можно добавить методы и свойства, специфичные для блока ФИО
     static public function code() 
     {
         return 'facultative';
@@ -54,7 +52,6 @@ class FacultativeBlock extends ProfileBlockBase
                 $comma = ", ";
             } 
         }
-            
         return '<div class="' . static::code() . '-block">' . $html . '</div>';
     }
 
@@ -67,9 +64,7 @@ class FacultativeBlock extends ProfileBlockBase
         $facultative_predmet_ids =[];
         if (isset($this->loadedData['facultative_predmet_ids'])) {
             $facultative_predmet_ids = $this->loadedData['facultative_predmet_ids'];
-        } else {
-            $this->errors[] = 'Данные Фамилии не загружены';
-        }
+        } 
 
         if (empty($this->errors)) {
             $insertedIds = array_diff($facultative_predmet_ids, $this->data['facultative_predmet_ids']);
@@ -88,33 +83,16 @@ class FacultativeBlock extends ProfileBlockBase
                 ]);
             }
         }
-
-        // if (isset($this->loadedData['name'])) {
-        //     $name = trim($this->loadedData['name']);
-        //     if (empty($name)) {
-        //         $this->errors[] = 'Имя не может быть пустым';
-        //     } 
-        // } else {
-        //     $this->errors[] = 'Данные Имени не загружены';
-        // }
-
-        // if (isset($this->loadedData['lastname'])) {
-        //     $lastname = trim($this->loadedData['lastname']);            
-        // } 
-
-        // if (empty($this->errors)) {
-        //     // Если ошибок нет, можно сохранить данные в профиль
-        //     (new User())->update(
-        //         $this->user['id'], 
-        //         [
-        //             'surname' => $surname,
-        //             'name' => $name,
-        //             'lastname' => $lastname,
-        //             // 'email' => $email
-        //         ]
-        //     ); // Assuming update method exists
-
-        // }
+        // Обновляем профиль, чтобы отметить, что блок факультативов был изменен
+        $facultative_predmet_ids = (new \App\Models\FacultativeUser())->findWhere(
+            ['user_id' => $this->profile['user_id']]);
+        $facultIsset = empty($facultative_predmet_ids) ? 0 : 1;
+        (new \App\Models\Profile())->update(
+            $this->profile['id'], 
+            [
+                'facult_block' => $facultIsset,
+            ]
+        );
     }
 
     public function properties(): array
